@@ -1,0 +1,251 @@
+<h3>Productos</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-8">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">Search</span>
+                <input type="text" class="form-control" aria-describedby="basic-addon1">
+             </div>
+        </div>
+        <div class="col-xs-4">
+            <button class="btn btn-primary">
+                <i class="fa fa-plus"></i>
+                Nvo Producto
+            </button>
+        </div>
+    </div>
+</div>
+<table class="table table-responsive ">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nombre</th>
+      <th>Nombre Técnico</th>
+      <th>descripcion</th>
+      <th>Categoria</th>
+      <th>Medida</th>
+      <th>Venta en</th>
+      <th>P.Compra</th>
+      <th>P.Normal</th>
+      <th>P.Promo</th>
+      <th>Imagen</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="info" *ngFor="let prod of products" style="font-size:.8em;margin:0;padding:0;">
+      <td>{{prod.id}}</td>
+      <td>{{prod.nombre}}</td>
+      <td>{{prod.nombre_tecnico}}</td>
+      <td>{{prod.descripcion}}</td>
+      <td>{{prod.categoria}}</td>
+      <td>{{prod.cantidad_medida +" "+ prod.tipo_medida}}</td>
+      <td>{{prod.unidades_venta}}</td>
+      <td>{{prod.precio_compra}}</td>
+      <td>{{prod.precio_normal}}</td>
+      <td>{{prod.precio_promocion}}</td>
+      
+      <td>
+          <img src="{{prod.url_imagen}}" alt="" class="img img-circle img-responsive img-zoom" style="width:30px;height:30px">
+      </td>
+      <td>
+          <div class="row">
+                <div class="col-xs-5">
+                    <button class="btn btn-primary" (click)="edit(prod)">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+          </div>
+                <div class="col-xs-7">
+                    <button class="btn btn-danger" *ngIf="prod.estado == 1">
+                        <i class="fa fa-thumbs-down"></i>
+                    </button>
+                    <button class="btn btn-danger" *ngIf="prod.estado == 0">
+                        <i class="fa fa-thumbs-up"></i>
+                    </button>
+                </div>
+          </div>
+      </td>
+    </tr>
+  </tbody>
+</table> 
+
+
+<div class="paneles edit-prod" id="panel-edit">
+    <div class="panel-primary">
+        <div class="panel-heading" onclick="$('#panel-bd').slideToggle();">
+            Editar el producto
+            <i class="fa fa-close" style="position:absolute;right:0;padding-right:1em"
+                (click)="closePanel()"
+            ></i>
+        </div>
+        <div id="panel-bd">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Id</span>
+                        <input type="text" class="form-control" [(ngModel)]="editprod.id" disabled>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Nombre</span>
+                        <input type="text" class="form-control" [(ngModel)]="editprod.nombre">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">N. Técnico</span>
+                        <input type="text" class="form-control" [(ngModel)]="editprod.nombre_tecnico">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Descripcion</span>
+                        <input type="text" class="form-control" [(ngModel)]="editprod.descripcion">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Medida en</span>
+                        <input type="text" class="form-control" [(ngModel)]="editprod.tipo_medida">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">uni en el Prod</span>
+                        <input type="text" class="form-control" [(ngModel)]="editprod.cantidad_medida">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Unidad Venta</span>
+                        <input type="text" class="form-control" [(ngModel)]="editprod.unidades_venta">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Categoria</span>
+                        <select class="form-control" [(ngModel)]="editprod.id_sub_categoria" >
+                            <option *ngFor="let item of subcategorias" value="{{item.id}}">{{item.sub_categoria}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Prec Compra</span>
+                        <input type="text" class="form-control" [(ngModel)]="editprod.precio_compra">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Prc Normal</span>
+                        <input type="text" class="form-control" [(ngModel)]="editprod.precio_normal">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Prec Promocion</span>
+                        <input type="text" class="form-control" [(ngModel)]="editprod.precio_promocion">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Detalle Promo</span>
+                        <input type="text" class="form-control" [(ngModel)]="editprod.detalle_promocion">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Url Image</span>
+                        <input type="text" class="form-control" [(ngModel)]="editprod.url_imagen">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <button class="btn btn-primary btn-block">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="paneles edit-prod">
+    <div class="panel-green">
+        <div class="panel-heading" onclick="$('#panel-bd').slideToggle();">
+            Editar el producto
+            <i class="fa fa-close" style="position:absolute;right:0;padding-right:1em"></i>
+        </div>
+        <div id="panel-bd">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Nombre</span>
+                        <input type="text" class="form-control" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">N. Técnico</span>
+                        <input type="text" class="form-control" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Descripcion</span>
+                        <input type="text" class="form-control" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Medida en</span>
+                        <input type="text" class="form-control" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Unidad Venta</span>
+                        <input type="text" class="form-control" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Categoria</span>
+                        <input type="text" class="form-control" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Prec Compra</span>
+                        <input type="text" class="form-control" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Prc Normal</span>
+                        <input type="text" class="form-control" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Prec Promocion</span>
+                        <input type="text" class="form-control" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Detalle Promo</span>
+                        <input type="text" class="form-control" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Url Image</span>
+                        <input type="text" class="form-control" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <button class="btn btn-primary btn-block">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
