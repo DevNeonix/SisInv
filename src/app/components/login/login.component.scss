@@ -1,0 +1,39 @@
+.login{
+    width: calc( 100% - 2em );
+    border: 1px solid #eee;
+    box-shadow: 1px 2px 2px #ddd;
+    margin: 1em;
+    padding: 1em;
+    max-height: 70vh;
+    .container{
+        .logo{
+            img{
+                width:65%;
+                display: block;
+                margin: 0 auto;
+            }
+        }
+    }
+}
+.showpassword{
+        color: #ffffff;
+    background-color: #158cba;
+    border-color: #127ba3;
+}
+
+@media(min-width:768px) {
+    .login{
+        display: block;
+        margin: 0 auto;
+    .container{
+        width: 50%;
+            .logo{
+                img{
+                    width:35%;
+                    display: block;
+                    margin: 0 auto;
+                }
+            }
+        }
+    }
+}

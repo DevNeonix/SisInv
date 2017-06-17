@@ -153,7 +153,7 @@ ul.alert-dropdown {
     .side-nav li a:focus {
         
         outline: none;
-        background-color: map-get($colors , primary-color ) !important;
+        background-color: lighten(map-get($colors , primary-color ), 10) !important;
         color: map-get($colors , primary-color-text ) !important;
         
     }
@@ -294,7 +294,3 @@ li.active{
         
     }
 }
-
-.input-group-addon{
-        width: 125px !important;
-    }

@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="alert alert-danger" *ngIf="errorCuenta">
+      Usuario o Contraseña errada
+</div>
+<br>
+<div class="login">
+  <div class="container">
+    <div class="logo">
+      <img src="./assets/angular.png" class="img img-responsive" alt="">
+    </div>
+    <div class="form">
+      <form #frmlogin="ngForm" (ngSubmit)="onSubmit(frmlogin)">
+          <p>
+            Email
+            <input type="email" class="form-control" name="email" ngModel #email="ngModel" required>
+          </p>
+          <div class="alert alert-danger" *ngIf="!email.valid && email.touched">
+            Campo Requerido
+          </div>
+          <div class="input-group">
+              
+              <input type="password" class="form-control" aria-describedby="basic-addon1" id="textpass" name="password" ngModel #password="ngModel" required>
+              <span class="input-group-addon"  (click)="showPass()" id="basic-addon1" id="showpass">
+                <i class="fa fa-eye"></i>
+              </span>
+            
+          </div>
+          <div class="alert alert-danger" *ngIf="!password.valid && password.touched">
+            Campo Requerido
+          </div>
+          <br>
+          <button class="btn btn-primary btn-block" type="submit" [disabled]="!frmlogin.valid">Sign In</button>
+      </form>
+    </div>
+    
+    <br>
+
+    <p class="text-center">
+      <a [routerLink]="['ovidemicontrasena']" >Ovide mi contrasena</a>
+    </p>
+  </div>
+</div>
+
+</div>
